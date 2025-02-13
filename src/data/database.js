@@ -1,5 +1,5 @@
 //Arrays vazios para armazenar os dados
-let pessoas = [];
-let transacoes = [];
+let users = [];
+let transactions = [];
 
-module.exports = { pessoas, transacoes }; // exporta os arrays para serem utilizados em outros arquivos
+module.exports = { users, transactions }; // exporta os arrays para serem utilizados em outros arquivos

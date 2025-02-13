@@ -1,11 +1,11 @@
 const express = require("express"); // importa o framework express
 const app = express(); // cria uma instância do express
-const pessoaRoutes = require("./src/routes/pessoaRoutes"); // importa as rotas de pessoa
-const transacaoRoutes = require("./src/routes/transacaoRoutes"); // importa as rotas de transação
+const userRoutes = require("./src/routes/userRoutes"); // importa as rotas de pessoa
+const transactionRoutes = require("./src/routes/transactionRoutes"); // importa as rotas de transação
 
 app.use(express.json()); // habilita o uso de JSON no express
-app.use("/pessoas", pessoaRoutes); // define a rota para pessoa
-app.use("/transacoes", transacaoRoutes); // define a rota para transação
+app.use("/users", userRoutes); // define a rota para pessoa
+app.use("/transactions", transactionRoutes); // define a rota para transação
 
 const PORT = 3000; // define a porta que o servidor irá rodar
 // inicia o servidor na porta definida (porta 3000)
