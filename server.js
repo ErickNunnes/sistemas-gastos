@@ -1,8 +1,10 @@
 const express = require("express"); // importa o framework express
 const app = express(); // cria uma instância do express
+const cors = require("cors");
 const userRoutes = require("./src/routes/userRoutes"); // importa as rotas de pessoa
 const transactionRoutes = require("./src/routes/transactionRoutes"); // importa as rotas de transação
 
+app.use(cors());
 app.use(express.json()); // habilita o uso de JSON no express
 app.use("/users", userRoutes); // define a rota para pessoa
 app.use("/transactions", transactionRoutes); // define a rota para transação
