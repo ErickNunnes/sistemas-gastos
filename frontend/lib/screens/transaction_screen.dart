@@ -67,12 +67,29 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   ),
                   DropdownButtonFormField<String>(
                     value: _selectedType,
-                    items: ['receita', 'despesa'].map((type) {
-                      return DropdownMenuItem(
-                        value: type,
-                        child: Text(type == 'receita' ? 'Receita' : 'Despesa'),
-                      );
-                    }).toList(),
+                    items: (_selectedUserId != null)
+                        ? userProvider.users
+                            .where((user) =>
+                                user.id == int.parse(_selectedUserId!))
+                            .map((user) => user.age < 18
+                                    ? [
+                                        'despesa'
+                                      ] // Apenas "despesa" se menor de idade
+                                    : [
+                                        'receita',
+                                        'despesa'
+                                      ] // Ambos se maior de idade
+                                )
+                            .expand((list) => list)
+                            .map((type) {
+                            return DropdownMenuItem(
+                              value: type,
+                              child: Text(
+                                type == 'receita' ? 'Receita' : 'Despesa',
+                              ),
+                            );
+                          }).toList()
+                        : [],
                     onChanged: (value) {
                       setState(() {
                         _selectedType = value;
