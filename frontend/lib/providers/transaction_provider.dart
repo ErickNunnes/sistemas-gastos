@@ -31,18 +31,15 @@ class TransactionProvider with ChangeNotifier {
     }
   }
 
-  // Deletar uma transação
-  //Future<void> deleteTransaction(int id) async {
-  //  try {
-  //    // Chama a API para deletar a transação no backend
-  //    await ApiService.deleteTransaction(id);
-  //    _transactions.removeWhere((transaction) =>
-  //        transaction.id == id); // Remove a transação da lista local
-  //    notifyListeners(); // Notifica os listeners sobre a mudança
-  //  } catch (error) {
-  //    throw Exception('Falha ao deletar transação: $error');
-  //  }
-  //}
+  Future<void> deleteTransactionsByUserId(int userId) async {
+    try {
+      // Filtra as transações que não são do usuário a ser excluído
+      _transactions.removeWhere((transaction) => transaction.userId == userId);
+      notifyListeners(); // Notifica os listeners sobre a mudança
+    } catch (error) {
+      throw Exception('Falha ao deletar transações do usuário: $error');
+    }
+  }
 
   // Buscar transações de um usuário específico
   List<Transaction> getTransactionsByUserId(int userId) {

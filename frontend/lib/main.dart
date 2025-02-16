@@ -8,11 +8,12 @@ import 'screens/transaction_screen.dart';
 import 'screens/totals_screen.dart';
 
 void main() {
+  final transctionProvider = TransactionProvider();
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => UserProvider()),
-        ChangeNotifierProvider(create: (_) => TransactionProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider(transctionProvider)),
+        ChangeNotifierProvider.value(value: transctionProvider),
       ],
       child: MyApp(),
     ),
