@@ -40,20 +40,5 @@ const createTransaction = (req, res) => {
 const listTransaction = (req, res) => {
   res.json(transactions);
 };
-// logica para deletar uma transação pelo Id da transação.
-const deleteTransaction = (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = transactions.findIndex((t) => t.id === id);
 
-  //logica para ver se a transação existe.
-  if (index === -1) {
-    return res
-      .status(404)
-      .json({ erro: "Não foi possivel encontrar a transação" }); // retorna o erro caso a transação não possa ser encontrada.
-  }
-
-  transactions.splice(index, 1);
-  res.status(204).send();
-};
-
-module.exports = { createTransaction, listTransaction, deleteTransaction }; // exporta as funções para serem utilizadas em outros arquivos.
+module.exports = { createTransaction, listTransaction }; // exporta as funções para serem utilizadas em outros arquivos.

@@ -8,6 +8,5 @@ const {
 
 router.post("/", createTransaction); //define a rota para criar uma transação.
 router.get("/", listTransaction); // define a rota para listar as transações.
-router.delete("/:id", deleteTransaction); // define a rota para deletar uma transação.
 
 module.exports = router; // exporta as rotas para serem utilizadas em outros arquivos.
