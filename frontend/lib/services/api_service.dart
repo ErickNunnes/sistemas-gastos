@@ -6,8 +6,6 @@ import '../models/transaction.dart';
 class ApiService {
   static const String baseUrl = 'http://localhost:3000'; // URL do backend
 
-  // ==================== Métodos para Usuários ====================
-
   // Listar todos os usuários
   static Future<List<User>> listUsers() async {
     final response = await http.get(Uri.parse('$baseUrl/users'));
@@ -47,8 +45,6 @@ class ApiService {
     }
   }
 
-  // ==================== Métodos para Transações ====================
-
   // Listar todas as transações
   static Future<List<Transaction>> listTransactions() async {
     final response = await http.get(Uri.parse('$baseUrl/transactions'));
@@ -82,13 +78,13 @@ class ApiService {
   }
 
   // Deletar uma transação
-  static Future<void> deleteTransaction(int id) async {
-    final response = await http.delete(Uri.parse('$baseUrl/transactions/$id'));
-
-    if (response.statusCode != 200) {
-      throw Exception('Falha ao deletar transação');
-    }
-  }
+  // static Future<void> deleteTransaction(int id) async {
+  //   final response = await http.delete(Uri.parse('$baseUrl/transactions/$id'));
+//
+  //   if (response.statusCode != 200) {
+  //     throw Exception('Falha ao deletar transação');
+  //   }
+  // }
 
   // Consultar totais de receitas, despesas e saldo por usuário
   static Future<List<Map<String, dynamic>>> consultTotals() async {
