@@ -20,35 +20,38 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.person_add),
-            title: Text('Cadastrar Usuário'),
-            onTap: () {
-              Navigator.pop(context); // Fecha o Drawer
-              Navigator.pushReplacementNamed(context, '/criar-usuario');
-            },
-          ),
+              leading: Icon(Icons.person_add),
+              title: Text('Cadastrar Usuário'),
+              onTap: () {
+                Navigator.pop(context); //Fecha o Drawer
+                Navigator.pushReplacementNamed(context,
+                    '/criar-usuario'); //Navega para a tela de criar usuário
+              }),
           ListTile(
             leading: Icon(Icons.people),
             title: Text('Listar Usuários'),
             onTap: () {
-              Navigator.pop(context); // Fecha o Drawer
-              Navigator.pushReplacementNamed(context, '/listar-usuarios');
+              Navigator.pop(context); //Fecha o Drawer
+              Navigator.pushReplacementNamed(context,
+                  '/listar-usuarios'); //Navega para a tela de listar usuários
             },
           ),
           ListTile(
             leading: Icon(Icons.attach_money),
             title: Text('Criar Transação'),
             onTap: () {
-              Navigator.pop(context); // Fecha o Drawer
-              Navigator.pushReplacementNamed(context, '/criar-transacao');
+              Navigator.pop(context); //Fecha o Drawer
+              Navigator.pushReplacementNamed(context,
+                  '/criar-transacao'); //Navega para a tela de criar transação
             },
           ),
           ListTile(
             leading: Icon(Icons.list),
             title: Text('Listar Totais'),
             onTap: () {
-              Navigator.pop(context); // Fecha o Drawer
-              Navigator.pushReplacementNamed(context, '/listar-totais');
+              Navigator.pop(context); //Fecha o Drawer
+              Navigator.pushReplacementNamed(context,
+                  '/listar-totais'); //Navega para a tela de listar totais
             },
           ),
         ],

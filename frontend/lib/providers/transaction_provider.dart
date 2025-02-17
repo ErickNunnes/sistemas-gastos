@@ -3,38 +3,39 @@ import '../models/transaction.dart';
 import '../services/api_service.dart';
 
 class TransactionProvider with ChangeNotifier {
-  List<Transaction> _transactions = [];
+  List<Transaction> _transactions = []; //Lista de transações
 
-  // Getter para acessar a lista de transações
+  //Getter para acessar a lista de transações
   List<Transaction> get transactions => _transactions;
 
-  // Carregar transações do backend
+  //Carregar transações do backend
   Future<void> loadTransactions() async {
     try {
-      // Chama a API para buscar as transações
+      //Chama a API para buscar as transações
       _transactions = await ApiService.listTransactions();
-      notifyListeners(); // Notifica os listeners sobre a mudança
+      notifyListeners(); //Notifica os listeners sobre a mudança
     } catch (error) {
       throw Exception('Falha ao carregar transações: $error');
     }
   }
 
-  // Adicionar uma nova transação
+  //Adicionar uma nova transação
   Future<void> addTransaction(Transaction transaction) async {
     try {
-      // Chama a API para criar a transação no backend
+      //Chama a API para criar a transação no backend
       final newTransaction = await ApiService.createTransaction(transaction);
-      _transactions.add(newTransaction); // Adiciona a transação à lista local
-      notifyListeners(); // Notifica os listeners sobre a mudança
+      _transactions.add(newTransaction); //Adiciona a transação à lista local
+      notifyListeners(); //Notifica os listeners sobre a mudança
     } catch (error) {
       throw Exception('Falha ao criar transação: $error');
     }
   }
 
+  //Deleta as transações de um usuario especifico
   Future<void> deleteTransactionsByUserId(int userId) async {
     try {
-      // Filtra as transações que não são do usuário a ser excluído
-      _transactions.removeWhere((transaction) => transaction.userId == userId);
+      _transactions.removeWhere((transaction) =>
+          transaction.userId == userId); //Remove as transações do usuario
       notifyListeners(); // Notifica os listeners sobre a mudança
     } catch (error) {
       throw Exception('Falha ao deletar transações do usuário: $error');

@@ -9,13 +9,13 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
-  late Future<void> _loadUsersFuture;
+  late Future<void> _loadUsersFuture; //Para carregar os  usuários
 
   @override
   void initState() {
     super.initState();
-    _loadUsersFuture =
-        Provider.of<UserProvider>(context, listen: false).loadUsers();
+    _loadUsersFuture = Provider.of<UserProvider>(context, listen: false)
+        .loadUsers(); //Carrega os usuários ao iniciar
   }
 
   @override
@@ -26,9 +26,9 @@ class _ListScreenState extends State<ListScreen> {
       appBar: AppBar(
         title: const Text('Listar Usuários'),
       ),
-      drawer: CustomDrawer(), // Drawer para navegação
+      drawer: CustomDrawer(), //Drawer para navegação
       body: FutureBuilder(
-        future: _loadUsersFuture, // Use o Future inicializado no initState
+        future: _loadUsersFuture, //Use o Future para carregar os dados
         builder: (context, snapshot) {
           print('Estado do FutureBuilder: ${snapshot.connectionState}');
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -53,7 +53,8 @@ class _ListScreenState extends State<ListScreen> {
                     icon: const Icon(Icons.delete, color: Colors.red),
                     onPressed: () async {
                       try {
-                        await userProvider.deleteUser(user.id);
+                        await userProvider
+                            .deleteUser(user.id); //Deleta o usuário
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                               content: Text('Usuário deletado com sucesso!')),

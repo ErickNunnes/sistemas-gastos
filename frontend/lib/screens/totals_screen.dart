@@ -6,7 +6,8 @@ import '../widgets/custom_drawer.dart';
 
 class TotalsScreen extends StatefulWidget {
   @override
-  _TotalsScreenState createState() => _TotalsScreenState();
+  _TotalsScreenState createState() =>
+      _TotalsScreenState(); //Carrega os usuários e as transações
 }
 
 class _TotalsScreenState extends State<TotalsScreen> {
@@ -26,7 +27,7 @@ class _TotalsScreenState extends State<TotalsScreen> {
     ]);
   }
 
-  // Função para calcular os totais gerais
+  //Função para calcular os totais gerais
   Map<String, dynamic> calcularTotaisGerais() {
     final transactionProvider =
         Provider.of<TransactionProvider>(context, listen: false);
@@ -53,7 +54,7 @@ class _TotalsScreenState extends State<TotalsScreen> {
     final userProvider = Provider.of<UserProvider>(context);
     final transactionProvider = Provider.of<TransactionProvider>(context);
 
-    // Função para calcular os totais por usuário
+    //Função para calcular os totais por usuário
     Map<String, dynamic> calcularTotais(int userId) {
       final transacoes = transactionProvider.transactions
           .where((t) => t.userId == userId)
@@ -76,19 +77,19 @@ class _TotalsScreenState extends State<TotalsScreen> {
       };
     }
 
-    // Calcula os totais gerais
+    //Calcula os totais gerais
     final totaisGerais = calcularTotaisGerais();
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Totais por Usuário'),
       ),
-      drawer: CustomDrawer(), // Drawer para navegação
+      drawer: CustomDrawer(), //Drawer para navegação
       body: FutureBuilder(
         future: _loadUsersFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator()); //Exibe o loading
           } else if (snapshot.hasError) {
             return Center(
                 child: Text('Erro ao carregar dados: ${snapshot.error}'));
@@ -97,7 +98,7 @@ class _TotalsScreenState extends State<TotalsScreen> {
           } else {
             return Column(
               children: [
-                // Exibe os totais gerais
+                //Exibe os totais gerais
                 Card(
                   margin: EdgeInsets.all(8.0),
                   child: Padding(
@@ -129,7 +130,7 @@ class _TotalsScreenState extends State<TotalsScreen> {
                     ),
                   ),
                 ),
-                // Lista de usuários com seus totais
+                //Lista de usuários com seus totais
                 Expanded(
                   child: ListView.builder(
                     itemCount: userProvider.users.length,
@@ -171,7 +172,7 @@ class _TotalsScreenState extends State<TotalsScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            // Recarrega os dados quando o botão é pressionado
+            //Recarrega os dados quando o botão é pressionado
             final userProvider =
                 Provider.of<UserProvider>(context, listen: false);
             final transactionProvider =

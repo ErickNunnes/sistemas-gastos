@@ -12,16 +12,18 @@ class TransactionScreen extends StatefulWidget {
 }
 
 class _TransactionScreenState extends State<TransactionScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _valorController = TextEditingController();
-  final _descricaoController = TextEditingController();
-  String? _selectedUserId;
-  String? _selectedType;
+  final _formKey = GlobalKey<FormState>(); //Chave para o formulario
+  final _valorController =
+      TextEditingController(); //Controlador para o campo de valor
+  final _descricaoController =
+      TextEditingController(); //Controlador para o campo de descrição
+  String? _selectedUserId; //ID do usuário selecionado
+  String? _selectedType; //Tipo de transação selecionado
 
   @override
   void dispose() {
-    _valorController.dispose();
-    _descricaoController.dispose();
+    _valorController.dispose(); //Libera o controlador valor
+    _descricaoController.dispose(); //Libera o controlador descrição
     super.dispose();
   }
 
@@ -34,10 +36,10 @@ class _TransactionScreenState extends State<TransactionScreen> {
       appBar: AppBar(
         title: Text('Criar Transação'),
       ),
-      drawer: CustomDrawer(), // Drawer para navegação
+      drawer: CustomDrawer(), //Drawer para navegação
       body: Column(
         children: [
-          // Formulário para criar transação
+          //Formulário para criar transação
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Form(
@@ -54,7 +56,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
                     }).toList(),
                     onChanged: (value) {
                       setState(() {
-                        _selectedUserId = value;
+                        _selectedUserId =
+                            value; //Atualiza o usuário selecionado
                       });
                     },
                     decoration: InputDecoration(labelText: 'Usuário'),
@@ -74,11 +77,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
                             .map((user) => user.age < 18
                                     ? [
                                         'despesa'
-                                      ] // Apenas "despesa" se menor de idade
+                                      ] //Apenas "despesa" se menor de idade
                                     : [
                                         'receita',
                                         'despesa'
-                                      ] // Ambos se maior de idade
+                                      ] //Ambos se maior de idade
                                 )
                             .expand((list) => list)
                             .map((type) {
@@ -92,7 +95,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                         : [],
                     onChanged: (value) {
                       setState(() {
-                        _selectedType = value;
+                        _selectedType = value; //Atualiza o tipo selecionado
                       });
                     },
                     decoration: InputDecoration(labelText: 'Tipo'),
@@ -128,25 +131,28 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        // Cria um objeto Transaction
+                        //Cria um objeto Transaction com os dados do formulário
                         final transaction = Transaction(
-                          id: DateTime.now().millisecondsSinceEpoch,
-                          userId: int.parse(_selectedUserId!),
-                          type: _selectedType!,
-                          value: double.parse(_valorController.text),
-                          description: _descricaoController.text,
+                          id: DateTime.now()
+                              .millisecondsSinceEpoch, //Gera um ID único
+                          userId: int.parse(_selectedUserId!), //ID do usuário
+                          type: _selectedType!, //Tipo de transação
+                          value: double.parse(
+                              _valorController.text), //Valor da transação
+                          description: _descricaoController
+                              .text, //Descrição da transação
                         );
 
-                        // Adiciona a transação usando o TransactionProvider
+                        //Adiciona a transação usando o TransactionProvider
                         await transactionProvider.addTransaction(transaction);
 
-                        // Exibe uma mensagem de sucesso
+                        //Exibe uma mensagem de sucesso
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                               content: Text('Transação criada com sucesso!')),
                         );
 
-                        // Limpa os campos do formulário
+                        //Limpa os campos do formulário
                         _valorController.clear();
                         _descricaoController.clear();
                         setState(() {
@@ -162,7 +168,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
             ),
           ),
 
-          // Lista de transações
+          //Lista de transações
           Expanded(
             child: ListView.builder(
               itemCount: transactionProvider.transactions.length,
@@ -173,7 +179,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   orElse: () => User(
                       id: -1,
                       name: 'Desconhecido',
-                      age: 0), // Fallback para usuário não encontrado
+                      age: 0), //Fallback para usuário não encontrado
                 );
 
                 return ListTile(
