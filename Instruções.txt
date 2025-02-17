@@ -1,0 +1,18 @@
+Tecnologias Utilizadas:
+Backend: Node.js
+Frontend: Flutter/Dart
+
+Comandos para Rodar o Sistema:
+Backend:
+Abra um terminal e navegue até a pasta do backend (onde está o arquivo server.js).
+
+Execute o comando:
+node server.js
+
+Frontend:
+Abra outro terminal e navegue até a pasta do frontend (dentro da pasta frontend).
+
+Execute o comando:
+flutter run
+
+Link do repositório no GitHub: https://github.com/ErickNunnes/sistemas-gastos
