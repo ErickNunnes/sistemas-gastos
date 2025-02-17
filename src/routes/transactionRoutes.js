@@ -3,7 +3,6 @@ const router = express.Router(); // cria uma instância de rotas do express
 const {
   createTransaction,
   listTransaction,
-  deleteTransaction,
 } = require("../controllers/transactionController"); // importa as funções de transação
 
 router.post("/", createTransaction); //define a rota para criar uma transação.
